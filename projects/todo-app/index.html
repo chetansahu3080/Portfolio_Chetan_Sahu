@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Mobile Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>To-Do | Stay Productive</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Decorative Elements -->
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
+    <div class="bg-circle circle-3"></div>
+    <div class="bg-circle circle-4"></div>
+
+
+    <!-- ================= MAIN APP ================= -->
+
+    <div class="app-container">
+
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+            <!-- Logo -->
+            <div class="logo-area">
+
+                <div class="logo-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+
+                <div class="logo-text">
+                    <h1>To-Do</h1>
+                    <p>Small steps. Big dreams. <span>♡</span></p>
+                </div>
+
+            </div>
+
+
+            <!-- Navigation -->
+
+            <nav class="sidebar-nav">
+
+                <button class="nav-item active" data-filter="all">
+
+                    <span class="nav-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </span>
+
+                    <span class="nav-name">All Tasks</span>
+
+                    <span class="nav-count" id="allCount">5</span>
+
+                </button>
+
+
+                <button class="nav-item" data-filter="pending">
+
+                    <span class="nav-icon">
+                        <i class="fa-regular fa-clock"></i>
+                    </span>
+
+                    <span class="nav-name">Pending</span>
+
+                    <span class="nav-count" id="pendingCount">3</span>
+
+                </button>
+
+
+                <button class="nav-item" data-filter="completed">
+
+                    <span class="nav-icon">
+                        <i class="fa-regular fa-circle-check"></i>
+                    </span>
+
+                    <span class="nav-name">Completed</span>
+
+                    <span class="nav-count" id="completedCount">2</span>
+
+                </button>
+
+
+                <!-- Add Category -->
+
+                <button class="add-category">
+
+                    <span class="plus-category">
+                        <i class="fa-solid fa-plus"></i>
+                    </span>
+
+                    <span>Add Category</span>
+
+                </button>
+
+            </nav>
+
+
+            <!-- Productivity Quote -->
+
+            <div class="productivity-message">
+
+                <p>Stay</p>
+                <p>Productive</p>
+
+                <span class="quote-lines">〰</span>
+                <span class="quote-heart">♡</span>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- ================= MAIN CONTENT ================= -->
+
+        <main class="main-content">
+
+
+            <!-- Header -->
+
+            <header class="main-header">
+
+                <div class="welcome-text">
+
+                    <h2>
+                        Good Evening,
+                        <span class="wave">👋</span>
+                    </h2>
+
+                    <p>Keep going! You're doing great!</p>
+
+                </div>
+
+
+                <!-- Decorative Night Illustration -->
+
+                <div class="night-scene">
+
+                    <div class="moon"></div>
+
+                    <div class="stars">
+                        <span>✦</span>
+                        <span>✦</span>
+                        <span>✦</span>
+                        <span>✦</span>
+                    </div>
+
+                    <div class="mountains">
+                        <div class="mountain mountain-1"></div>
+                        <div class="mountain mountain-2"></div>
+                        <div class="mountain mountain-3"></div>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- ================= ADD TASK ================= -->
+
+            <section class="add-task-section">
+
+                <div class="task-input-wrapper">
+
+                    <div class="input-plus">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+
+                    <input
+                        type="text"
+                        id="taskInput"
+                        placeholder="Add a new task..."
+                        autocomplete="off"
+                    >
+
+                    <button id="addTaskBtn" class="add-task-btn">
+
+                        <i class="fa-regular fa-paper-plane"></i>
+
+                        <span>Add</span>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= FILTER TABS ================= -->
+
+            <section class="task-controls">
+
+                <div class="filter-tabs">
+
+                    <button class="filter-btn active" data-filter="all">
+                        All
+                    </button>
+
+                    <button class="filter-btn" data-filter="pending">
+                        Pending
+                    </button>
+
+                    <button class="filter-btn" data-filter="completed">
+                        Completed
+                    </button>
+
+                </div>
+
+
+                <!-- Sort -->
+
+                <button class="sort-btn" id="sortBtn">
+
+                    <i class="fa-solid fa-arrow-down-wide-short"></i>
+
+                    <span>Sort</span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+                <div class="sort-menu" id="sortMenu">
+
+                    <button data-sort="default">
+                        Default
+                    </button>
+
+                    <button data-sort="newest">
+                        Newest
+                    </button>
+
+                    <button data-sort="oldest">
+                        Oldest
+                    </button>
+
+                    <button data-sort="az">
+                        A → Z
+                    </button>
+
+                    <button data-sort="za">
+                        Z → A
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= TASK LIST ================= -->
+
+            <section class="task-list" id="taskList">
+
+
+                <!-- TASK 1 -->
+
+                <article class="task-card pending-task"
+                         data-category="study"
+                         data-status="pending">
+
+                    <button class="task-check">
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+
+
+                    <div class="task-information">
+
+                        <h3>Learn JavaScript</h3>
+
+                        <div class="task-meta">
+
+                            <span class="category study">
+
+                                <i class="fa-solid fa-graduation-cap"></i>
+
+                                Study
+
+                            </span>
+
+                            <span class="task-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                Today
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="task-actions">
+
+                        <button class="edit-btn">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+
+                        <button class="delete-btn">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+
+                        <button class="more-btn">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- TASK 2 -->
+
+                <article class="task-card completed-task"
+                         data-category="coding"
+                         data-status="completed">
+
+                    <button class="task-check checked">
+
+                        <i class="fa-solid fa-check"></i>
+
+                    </button>
+
+
+                    <div class="task-information">
+
+                        <h3>Complete HTML project</h3>
+
+                        <div class="task-meta">
+
+                            <span class="category coding">
+
+                                <i class="fa-solid fa-code"></i>
+
+                                Coding
+
+                            </span>
+
+                            <span class="task-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                Yesterday
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="task-actions">
+
+                        <button class="edit-btn">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+
+                        <button class="delete-btn">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+
+                        <button class="more-btn">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- TASK 3 -->
+
+                <article class="task-card pending-task"
+                         data-category="design"
+                         data-status="pending">
+
+                    <button class="task-check">
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+
+
+                    <div class="task-information">
+
+                        <h3>Practice CSS</h3>
+
+                        <div class="task-meta">
+
+                            <span class="category design">
+
+                                <i class="fa-solid fa-palette"></i>
+
+                                Design
+
+                            </span>
+
+                            <span class="task-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                Tomorrow
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="task-actions">
+
+                        <button class="edit-btn">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+
+                        <button class="delete-btn">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+
+                        <button class="more-btn">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- TASK 4 -->
+
+                <article class="task-card pending-task"
+                         data-category="personal"
+                         data-status="pending">
+
+                    <button class="task-check">
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+
+
+                    <div class="task-information">
+
+                        <h3>Buy groceries</h3>
+
+                        <div class="task-meta">
+
+                            <span class="category personal">
+
+                                <i class="fa-solid fa-cart-shopping"></i>
+
+                                Personal
+
+                            </span>
+
+                            <span class="task-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                Sat, 14 Sep
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="task-actions">
+
+                        <button class="edit-btn">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+
+                        <button class="delete-btn">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+
+                        <button class="more-btn">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- TASK 5 -->
+
+                <article class="task-card completed-task"
+                         data-category="health"
+                         data-status="completed">
+
+                    <button class="task-check checked">
+
+                        <i class="fa-solid fa-check"></i>
+
+                    </button>
+
+
+                    <div class="task-information">
+
+                        <h3>Go to the gym</h3>
+
+                        <div class="task-meta">
+
+                            <span class="category health">
+
+                                <i class="fa-solid fa-dumbbell"></i>
+
+                                Health
+
+                            </span>
+
+                            <span class="task-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                Fri, 13 Sep
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="task-actions">
+
+                        <button class="edit-btn">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+
+                        <button class="delete-btn">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+
+                        <button class="more-btn">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- Empty State -->
+
+            <div class="empty-state" id="emptyState">
+
+                <i class="fa-regular fa-clipboard"></i>
+
+                <h3>No tasks found</h3>
+
+                <p>Add a new task to get started.</p>
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+
+
+    <!-- ================= EDIT MODAL ================= -->
+
+    <div class="modal-overlay" id="editModal">
+
+        <div class="edit-modal">
+
+            <button class="close-modal" id="closeModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h2>Edit Task</h2>
+
+            <input
+                type="text"
+                id="editTaskInput"
+                placeholder="Task name"
+            >
+
+            <button id="saveEditBtn">
+                Save Changes
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>

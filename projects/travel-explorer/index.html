@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Travel Explorer</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Leaflet Map -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-location-arrow"></i>
+            </div>
+
+            <div class="logo-text">
+                <span>Travel</span>
+                <strong>Explorer</strong>
+            </div>
+        </div>
+
+
+        <nav class="navigation">
+
+            <button class="nav-item active">
+                <i class="fa-solid fa-house"></i>
+                <span>Explore</span>
+            </button>
+
+            <button class="nav-item" id="mapNav">
+                <i class="fa-regular fa-map"></i>
+                <span>Map</span>
+            </button>
+
+            <button class="nav-item">
+                <i class="fa-regular fa-heart"></i>
+                <span>Saved</span>
+            </button>
+
+            <button class="nav-item">
+                <i class="fa-solid fa-suitcase"></i>
+                <span>Trips</span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-decoration">
+
+            <i class="fa-solid fa-plane plane-icon"></i>
+
+            <div class="mountains"></div>
+
+            <div class="quote">
+                Collect moments<br>
+                not things
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================= TOP BAR ================= -->
+
+        <header class="topbar">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search any city or destination..."
+                >
+
+                <div class="search-location">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <span>Worldwide</span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <button class="icon-button">
+                    <i class="fa-regular fa-moon"></i>
+                </button>
+
+                <button class="icon-button">
+                    <i class="fa-regular fa-bell"></i>
+                </button>
+
+                <button class="profile-button">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+
+                <i class="fa-solid fa-chevron-down profile-arrow"></i>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <div class="dashboard">
+
+
+            <!-- ================= LEFT AREA ================= -->
+
+            <section class="content-area">
+
+
+                <!-- HERO -->
+
+                <section class="hero">
+
+                    <div class="hero-overlay"></div>
+
+                    <div class="hero-content">
+
+                        <span class="featured">
+                            <i class="fa-solid fa-star"></i>
+                            Featured Destination
+                        </span>
+
+                        <h1>
+                            Explore the world,<br>
+                            <span>one place</span> at a time.
+                        </h1>
+
+                        <p>
+                            Discover amazing destinations, plan your next trip
+                            and experience the beauty of our planet.
+                        </p>
+
+                        <button class="explore-button" id="exploreButton">
+                            <i class="fa-regular fa-compass"></i>
+                            Explore Now
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+
+
+                    <div class="hero-location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span id="heroLocation">Tokyo, Japan</span>
+                    </div>
+
+
+                    <div class="hero-controls">
+
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+
+                        <button>
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+
+                        <button>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= POPULAR DESTINATIONS ================= -->
+
+                <section class="section">
+
+                    <div class="section-heading">
+
+                        <h2>
+                            <i class="fa-regular fa-paper-plane"></i>
+                            Popular Destinations
+                        </h2>
+
+                        <button class="view-all">
+                            View All
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+
+
+                    <div class="destination-grid" id="destinationGrid">
+
+                        <!-- Cards generated by JavaScript/API -->
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= LOWER CARDS ================= -->
+
+                <div class="lower-grid">
+
+
+                    <!-- FAMOUS PLACES -->
+
+                    <section class="info-section">
+
+                        <div class="info-heading">
+
+                            <h2>
+                                <i class="fa-solid fa-landmark"></i>
+                                Famous Places
+                            </h2>
+
+                            <button class="view-all">
+                                View All →
+                            </button>
+
+                        </div>
+
+                        <div class="mini-grid" id="placesContainer">
+                            <!-- API content -->
+                        </div>
+
+                    </section>
+
+
+                    <!-- LOCAL FOOD -->
+
+                    <section class="info-section">
+
+                        <div class="info-heading">
+
+                            <h2>
+                                <i class="fa-solid fa-utensils"></i>
+                                Local Food
+                            </h2>
+
+                            <button class="view-all">
+                                View All →
+                            </button>
+
+                        </div>
+
+                        <div class="mini-grid" id="foodContainer">
+                            <!-- API content -->
+                        </div>
+
+                    </section>
+
+
+                    <!-- NEARBY STAYS -->
+
+                    <section class="info-section">
+
+                        <div class="info-heading">
+
+                            <h2>
+                                <i class="fa-solid fa-bed"></i>
+                                Nearby Stays
+                            </h2>
+
+                            <button class="view-all">
+                                View All →
+                            </button>
+
+                        </div>
+
+                        <div class="mini-grid" id="staysContainer">
+                            <!-- API content -->
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= RIGHT SIDEBAR ================= -->
+
+            <aside class="right-panel">
+
+
+                <!-- WEATHER -->
+
+                <section class="weather-card">
+
+                    <div class="weather-top">
+
+                        <div class="weather-icon">
+                            <i class="fa-solid fa-cloud-sun"></i>
+                        </div>
+
+                        <div>
+
+                            <div class="temperature">
+                                <span id="temperature">22</span>°C
+                            </div>
+
+                            <div class="weather-status" id="weatherStatus">
+                                Partly Cloudy
+                            </div>
+
+                            <div class="weather-location"
+                                 id="weatherLocation">
+                                Tokyo, Japan
+                            </div>
+
+                        </div>
+
+                        <span class="live-weather">
+                            <span></span>
+                            Live Weather
+                        </span>
+
+                    </div>
+
+
+                    <div class="weather-details">
+
+
+                        <div class="detail-row">
+
+                            <i class="fa-regular fa-clock"></i>
+
+                            <span>Local Time</span>
+
+                            <strong id="localTime">
+                                08:45 PM
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <i class="fa-solid fa-users"></i>
+
+                            <span>Population</span>
+
+                            <strong id="population">
+                                37,393,000
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <i class="fa-regular fa-message"></i>
+
+                            <span>Language</span>
+
+                            <strong id="language">
+                                Japanese
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <i class="fa-regular fa-calendar"></i>
+
+                            <span>Best Time to Visit</span>
+
+                            <strong>
+                                Mar – May, Sep – Nov
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= MAP ================= -->
+
+                <section class="map-card">
+
+                    <div class="map-header">
+
+                        <button id="viewMapButton">
+                            <i class="fa-regular fa-map"></i>
+                            View on Map
+                        </button>
+
+                    </div>
+
+                    <div id="map"></div>
+
+                </section>
+
+
+                <!-- ================= PLAN TRIP ================= -->
+
+                <section class="trip-card">
+
+                    <div class="trip-overlay"></div>
+
+                    <div class="trip-content">
+
+                        <i class="fa-solid fa-route"></i>
+
+                        <h2>Plan Your Trip</h2>
+
+                        <p>
+                            Save places, create itineraries,
+                            make memories.
+                        </p>
+
+                        <button id="createTrip">
+                            Create Trip
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= QUOTE ================= -->
+
+                <section class="quote-card">
+
+                    <i class="fa-solid fa-mountain"></i>
+
+                    <p>
+                        Not all those who wander<br>
+                        are lost.
+                    </p>
+
+                    <span>—</span>
+
+                </section>
+
+
+            </aside>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- ================= LOADING ================= -->
+
+<div class="loading-screen" id="loadingScreen">
+
+    <div class="loader"></div>
+
+    <p>Exploring the world...</p>
+
+</div>
+
+
+<!-- ================= LEAFLET ================= -->
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- Our JavaScript -->
+
+<script src="script.js"></script>
+
+</body>
+</html>

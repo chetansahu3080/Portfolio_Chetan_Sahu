@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SkyCast - Weather Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- Leaflet Map -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIINfQ3pYkzV5W+g9s7Fh1k8x3h0m7V2mV8="
+          crossorigin="">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="style.css">
+</head>
+
+
+<body>
+
+    <!-- =================================================
+         LOADING SCREEN
+         ================================================= -->
+
+    <div class="loading-screen" id="loadingScreen">
+
+        <div class="loader"></div>
+
+        <p>Loading weather...</p>
+
+    </div>
+
+
+    <!-- =================================================
+         MAIN APP
+         ================================================= -->
+
+    <div class="app">
+
+
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
+
+        <aside class="sidebar">
+
+            <!-- LOGO -->
+
+            <div class="logo">
+
+                <div class="logo-weather-icon">
+
+                    <i class="fa-solid fa-cloud-sun"></i>
+
+                </div>
+
+                <div class="logo-text">
+
+                    <h1>
+                        Sky<span>Cast</span>
+                    </h1>
+
+                    <p>
+                        Weather for a better tomorrow
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="navigation">
+
+                <button class="nav-item active">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>Home</span>
+
+                </button>
+
+
+                <button class="nav-item"
+                        id="searchNav">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <span>Search</span>
+
+                </button>
+
+
+                <button class="nav-item">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                    <span>Favorites</span>
+
+                </button>
+
+
+                <button class="nav-item"
+                        id="mapNav">
+
+                    <i class="fa-regular fa-map"></i>
+
+                    <span>Maps</span>
+
+                </button>
+
+
+                <button class="nav-item">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    <span>Settings</span>
+
+                </button>
+
+            </nav>
+
+
+            <!-- SIDEBAR DECORATION -->
+
+            <div class="sidebar-decoration">
+
+                <div class="stars">
+
+                    <span>✦</span>
+                    <span>✦</span>
+                    <span>✧</span>
+                    <span>✦</span>
+
+                </div>
+
+                <div class="mountain mountain-one"></div>
+
+                <div class="mountain mountain-two"></div>
+
+                <div class="sidebar-quote">
+
+                    Every cloud
+                    <br>
+                    has a silver lining
+
+                    <span>♥</span>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =================================================
+             MAIN CONTENT
+             ================================================= -->
+
+        <main class="main-content">
+
+
+            <!-- =================================================
+                 TOP BAR
+                 ================================================= -->
+
+            <header class="topbar">
+
+
+                <!-- SEARCH -->
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search for a city..."
+                        autocomplete="off">
+
+                    <div class="search-location">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <span id="selectedLocation">
+                            New York, USA
+                        </span>
+
+                        <i class="fa-solid fa-chevron-down"></i>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="top-actions">
+
+                    <button class="top-icon">
+
+                        <i class="fa-regular fa-bell"></i>
+
+                        <span class="notification-dot"></span>
+
+                    </button>
+
+
+                    <button class="profile">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </button>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- =================================================
+                 DASHBOARD GRID
+                 ================================================= -->
+
+            <div class="dashboard">
+
+
+                <!-- =================================================
+                     LEFT / MAIN COLUMN
+                     ================================================= -->
+
+                <section class="main-column">
+
+
+                    <!-- =================================================
+                         CURRENT WEATHER HERO
+                         ================================================= -->
+
+                    <section class="current-weather"
+                             id="currentWeather">
+
+
+                        <!-- Dynamic background -->
+
+                        <div class="weather-background"
+                             id="weatherBackground"></div>
+
+
+                        <div class="weather-overlay"></div>
+
+
+                        <!-- WEATHER CONTENT -->
+
+                        <div class="weather-content">
+
+
+                            <!-- Location -->
+
+                            <div class="location-row">
+
+                                <div>
+
+                                    <h2>
+
+                                        <i class="fa-solid fa-location-dot"></i>
+
+                                        <span id="cityName">
+                                            New York
+                                        </span>
+
+                                    </h2>
+
+                                    <p id="countryName">
+                                        New York, USA
+                                    </p>
+
+                                </div>
+
+                                <div class="date-time">
+
+                                    <span id="currentDate">
+                                        Mon, 16 Sep 2024
+                                    </span>
+
+                                    <span>|</span>
+
+                                    <span id="currentTime">
+                                        08:45 PM
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- Main Weather -->
+
+                            <div class="weather-main">
+
+
+                                <div class="weather-symbol"
+                                     id="weatherIcon">
+
+                                    <i class="fa-solid fa-cloud-moon"></i>
+
+                                </div>
+
+
+                                <div class="temperature-area">
+
+                                    <div class="temperature">
+
+                                        <span id="temperature">
+                                            18
+                                        </span>
+
+                                        <sup>°C</sup>
+
+                                    </div>
+
+                                    <div class="weather-condition"
+                                         id="weatherCondition">
+
+                                        Partly Cloudy
+
+                                    </div>
+
+                                    <div class="feels-like">
+
+                                        Feels like
+
+                                        <span id="feelsLike">
+                                            17°C
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- Small Weather Stats -->
+
+                            <div class="weather-stats">
+
+
+                                <div class="weather-stat">
+
+                                    <div class="stat-icon">
+
+                                        <i class="fa-solid fa-droplet"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <p>Humidity</p>
+
+                                        <strong id="humidity">
+                                            72%
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="weather-stat">
+
+                                    <div class="stat-icon">
+
+                                        <i class="fa-solid fa-wind"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <p>Wind</p>
+
+                                        <strong id="windSpeed">
+                                            12 km/h
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="weather-stat">
+
+                                    <div class="stat-icon">
+
+                                        <i class="fa-solid fa-eye"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <p>Visibility</p>
+
+                                        <strong id="visibility">
+                                            10 km
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =================================================
+                         7 DAY FORECAST
+                         ================================================= -->
+
+                    <section class="card forecast-section">
+
+
+                        <div class="section-header">
+
+                            <h2>
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                7-Day Forecast
+
+                            </h2>
+
+                            <button class="view-button">
+
+                                View Full Forecast
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="forecast-container"
+                             id="forecastContainer">
+
+                            <!-- JS will insert forecast cards -->
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =================================================
+                         BOTTOM GRID
+                         ================================================= -->
+
+                    <div class="bottom-grid">
+
+
+                        <!-- WEATHER MAP -->
+
+                        <section class="card map-section">
+
+
+                            <div class="section-header">
+
+                                <h2>
+
+                                    <i class="fa-solid fa-map-location-dot"></i>
+
+                                    Weather Map
+
+                                </h2>
+
+
+                                <span class="live-badge">
+
+                                    <span></span>
+
+                                    Live
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="map-wrapper">
+
+                                <div id="weatherMap"></div>
+
+                                <div class="map-location-label"
+                                     id="mapLocationLabel">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                    New York
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="map-legend">
+
+                                <span>
+                                    <i class="legend rain"></i>
+                                    Rain
+                                </span>
+
+                                <span>
+                                    <i class="legend snow"></i>
+                                    Snow
+                                </span>
+
+                                <span>
+                                    <i class="legend clouds"></i>
+                                    Clouds
+                                </span>
+
+                                <span>
+                                    <i class="legend temperature"></i>
+                                    Temperature
+                                </span>
+
+                            </div>
+
+                        </section>
+
+
+
+                        <!-- CURRENT CONDITIONS -->
+
+                        <section class="card conditions-section">
+
+
+                            <div class="section-header">
+
+                                <h2>
+
+                                    <i class="fa-solid fa-cloud"></i>
+
+                                    Current Conditions
+
+                                </h2>
+
+                            </div>
+
+
+                            <div class="condition-list">
+
+
+                                <div class="condition-row">
+
+                                    <div class="condition-icon">
+
+                                        <i class="fa-solid fa-temperature-half"></i>
+
+                                    </div>
+
+                                    <span>
+                                        Temperature
+                                    </span>
+
+                                    <strong id="conditionTemp">
+                                        18°C
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="condition-row">
+
+                                    <div class="condition-icon">
+
+                                        <i class="fa-solid fa-temperature-half"></i>
+
+                                    </div>
+
+                                    <span>
+                                        Feels Like
+                                    </span>
+
+                                    <strong id="conditionFeels">
+                                        17°C
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="condition-row">
+
+                                    <div class="condition-icon">
+
+                                        <i class="fa-solid fa-droplet"></i>
+
+                                    </div>
+
+                                    <span>
+                                        Humidity
+                                    </span>
+
+                                    <strong id="conditionHumidity">
+                                        72%
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="condition-row">
+
+                                    <div class="condition-icon">
+
+                                        <i class="fa-solid fa-wind"></i>
+
+                                    </div>
+
+                                    <span>
+                                        Wind Speed
+                                    </span>
+
+                                    <strong id="conditionWind">
+                                        12 km/h
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="condition-row">
+
+                                    <div class="condition-icon">
+
+                                        <i class="fa-solid fa-gauge-high"></i>
+
+                                    </div>
+
+                                    <span>
+                                        Pressure
+                                    </span>
+
+                                    <strong id="pressure">
+                                        1018 hPa
+                                    </strong>
+
+                                </div>
+
+
+                            </div>
+
+                        </section>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =================================================
+                     RIGHT COLUMN
+                     ================================================= -->
+
+                <aside class="right-column">
+
+
+                    <!-- =================================================
+                         TODAY'S HIGHLIGHTS
+                         ================================================= -->
+
+                    <section class="card highlights-card">
+
+
+                        <div class="section-header">
+
+                            <h2>
+
+                                <i class="fa-solid fa-flask"></i>
+
+                                Today's Highlights
+
+                            </h2>
+
+                        </div>
+
+
+                        <div class="highlight-list">
+
+
+                            <!-- Sunrise -->
+
+                            <div class="highlight-item">
+
+                                <div class="highlight-icon sunrise">
+
+                                    <i class="fa-solid fa-sun"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <span>Sunrise</span>
+
+                                    <strong id="sunrise">
+                                        06:42 AM
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Sunset -->
+
+                            <div class="highlight-item">
+
+                                <div class="highlight-icon sunset">
+
+                                    <i class="fa-solid fa-sun"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <span>Sunset</span>
+
+                                    <strong id="sunset">
+                                        07:12 PM
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- UV -->
+
+                            <div class="highlight-item">
+
+                                <div class="highlight-icon">
+
+                                    <i class="fa-solid fa-sun"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <span>UV Index</span>
+
+                                    <strong id="uvIndex">
+                                        3 (Moderate)
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Air Quality -->
+
+                            <div class="highlight-item">
+
+                                <div class="highlight-icon air">
+
+                                    <i class="fa-solid fa-leaf"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <span>Air Quality</span>
+
+                                    <strong id="airQuality">
+                                        Good
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+
+                    <!-- =================================================
+                         POPULAR CITIES
+                         ================================================= -->
+
+                    <section class="card popular-card">
+
+
+                        <div class="section-header">
+
+                            <h2>
+
+                                <i class="fa-solid fa-fire"></i>
+
+                                Popular Cities
+
+                            </h2>
+
+                        </div>
+
+
+                        <div class="popular-cities"
+                             id="popularCities">
+
+                            <!-- JS creates these -->
+
+                        </div>
+
+
+                        <button class="all-cities">
+
+                            View All Cities
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+                    </section>
+
+                </aside>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =================================================
+         LEAFLET JS
+         ================================================= -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin="">
+    </script>
+
+
+    <!-- =================================================
+         YOUR JAVASCRIPT
+         ================================================= -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
