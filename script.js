@@ -4,25 +4,60 @@
    DARK / LIGHT MODE
 ========================================= */
 
-const themeBtn = document.getElementById("theme-btn");
+// const themeBtn = document.getElementById("theme-btn");
 
-themeBtn.addEventListener("click", () => {
+// themeBtn.addEventListener("click", () => {
 
-    document.body.classList.toggle("light-mode");
+//     document.body.classList.toggle("light-mode");
+
+//     const icon = themeBtn.querySelector("i");
+
+//     if (document.body.classList.contains("light-mode")) {
+
+//         icon.classList.remove("fa-moon");
+//         icon.classList.add("fa-sun");
+
+//     } else {
+
+//         icon.classList.remove("fa-sun");
+//         icon.classList.add("fa-moon");
+
+//     }
+
+// });
+/* =========================
+   DARK / LIGHT MODE
+========================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const themeBtn = document.getElementById("theme-btn");
+
+    if (!themeBtn) {
+        console.log("theme-btn not found");
+        return;
+    }
 
     const icon = themeBtn.querySelector("i");
 
-    if (document.body.classList.contains("light-mode")) {
+    themeBtn.addEventListener("click", function () {
 
-        icon.classList.remove("fa-moon");
-        icon.classList.add("fa-sun");
+        // Toggle light mode
+        document.body.classList.toggle("light-mode");
 
-    } else {
+        // Change icon
+        if (document.body.classList.contains("light-mode")) {
 
-        icon.classList.remove("fa-sun");
-        icon.classList.add("fa-moon");
+            icon.classList.remove("fa-moon");
+            icon.classList.add("fa-sun");
 
-    }
+        } else {
+
+            icon.classList.remove("fa-sun");
+            icon.classList.add("fa-moon");
+
+        }
+    });
 
 });
 

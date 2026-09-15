@@ -156,7 +156,7 @@ section {
     background: var(--blue);
 }
 
-.theme-btn {
+/* .theme-btn {
     background: transparent;
     border: none;
 
@@ -171,7 +171,7 @@ section {
 .theme-btn:hover {
     color: var(--blue);
     transform: rotate(20deg);
-}
+} */
 
 
 /* =========================================
@@ -1016,3 +1016,66 @@ body.light-mode .tags span {
     transform: translateY(0);
 }
 
+/* =========================
+   DARK / LIGHT MODE
+========================= */
+
+:root {
+    --bg: #08111f;
+    --text: #ffffff;
+    --card: #101c2e;
+    --blue: #00c8ff;
+    --border: #26384d;
+    --muted: #aebdce;
+}
+
+/* LIGHT MODE */
+body.light-mode {
+    --bg: #f5f9fc;
+    --text: #172033;
+    --card: #ffffff;
+    --blue: #246ddb;
+    --border: #d8e5ed;
+    --muted: #526173;
+}
+
+
+/* Apply colors */
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Theme button */
+.theme-btn {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.theme-btn:hover {
+    color: var(--blue);
+    transform: rotate(20deg);
+}
+
+/* Optional: make common sections change in light mode */
+body.light-mode .navbar,
+body.light-mode .experience-section,
+body.light-mode .section,
+body.light-mode a{
+    color: #111827;
+}
+body.light-mode p{
+    color: #111827;
+}
+body.light-mode h2{
+    color: #111827;
+}
+body.light-mode footer {
+    background: var(--bg);
+    color: var(--text);
+}
